@@ -404,24 +404,51 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
+/* 각 그래프 섹션 */
 .graph-item {
     display: none;
 }
 
 .graph-item.active {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 기본: 세로 배치 */
     gap: 30px;
 }
 
-canvas {
-    width: 100%;
-    height: 300px;
+/* 데스크톱에서 가로 배치 */
+@media (min-width: 992px) {
+    .graph-item.active {
+        flex-direction: row; 
+        align-items: center;
+    }
 }
 
+/* 캔버스: 높이 auto (Chart.js 내부 비율에 따름) */
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+/* 데스크톱(992px 이상)에서 차트 최대 높이 제한 */
+@media (min-width: 992px) {
+    canvas {
+        max-height: 500px;
+    }
+}
+
+/* 그래프 설명 */
 .graph-desc {
     border-top: 1px solid #eee;
     padding-top: 20px;
+}
+
+@media (min-width: 992px) {
+    .graph-desc {
+        border-top: none;
+        border-left: 1px solid #eee;
+        padding-top: 0;
+        padding-left: 30px;
+    }
 }
 
 .graph-desc h4 {
@@ -479,35 +506,16 @@ canvas {
    font-style: normal;
 }
 
-/* 반응형 스타일 */
-@media (min-width: 768px) {
-   .graph-item.active {
-       flex-direction: row;
-   }
-   
-   canvas {
-       width: 60%;
-   }
-   
-   .graph-desc {
-       width: 40%;
-       border-top: none;
-       border-left: 1px solid #eee;
-       padding-top: 0;
-       padding-left: 30px;
-   }
-}
-
 /* 비디오 섹션 */
 .videos {
    padding: 100px 0;
    background-color: white;
 }
 
-/* 반응형 비디오 컨테이너 추가 */
+/* 반응형 비디오 컨테이너 */
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 비율 */
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   max-width: 100%;
