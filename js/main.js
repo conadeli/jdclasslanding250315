@@ -141,40 +141,41 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!document.getElementById('readingChart')) return;
         
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
-        var chartOptions = {
-            responsive: true,
-            maintainAspectRatio: true, /* 비율 유지 */
-            aspectRatio: 2,           /* 가로:세로 = 2:1 (필요 시 2.5~3 등 조정 가능) */
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    title: {
-                        display: true,
-                        text: '능력 점수 (100점 만점)'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: '학습 기간'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + context.raw + '점';
-                        }
-                    }
+var chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,  // 비율 자동 유지 해제 (CSS에서 컨트롤)
+    aspectRatio: 1.5,            // 비율을 더 자연스럽게 조정
+    scales: {
+        y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+                display: true,
+                text: '능력 점수 (100점 만점)'
+            }
+        },
+        x: {
+            title: {
+                display: true,
+                text: '학습 기간'
+            }
+        }
+    },
+    plugins: {
+        legend: {
+            display: true,
+            position: 'top'
+        },
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    return context.dataset.label + ': ' + context.raw + '점';
                 }
             }
-        };
+        }
+    }
+};
+
         
         // 독해력 차트
         var readingCtx = document.getElementById('readingChart').getContext('2d');

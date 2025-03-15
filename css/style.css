@@ -423,16 +423,24 @@ nav ul li a:hover {
     }
 }
 
-/* 캔버스: 높이 auto (Chart.js 내부 비율에 따름) */
+/* 기본적으로 데스크톱과 큰 화면에서 적용 */
 canvas {
     width: 100%;
-    height: auto;
+    height: 400px;
+    max-height: 500px;
 }
 
-/* 데스크톱(992px 이상)에서 차트 최대 높이 제한 */
-@media (min-width: 992px) {
+/* 태블릿 화면 (768px 이하) */
+@media (max-width: 768px) {
     canvas {
-        max-height: 500px;
+        height: 300px;
+    }
+}
+
+/* 모바일 화면 (576px 이하) */
+@media (max-width: 576px) {
+    canvas {
+        height: 250px;
     }
 }
 
