@@ -1,0 +1,140 @@
+backend:
+  name: git-gateway
+  branch: main # Git 레포지토리의 브랜치명
+
+media_folder: "images/uploads" # 미디어 파일이 저장될 경로
+public_folder: "/images/uploads" # 공개 URL 경로
+
+collections:
+  - name: "settings" # 사이트 설정
+    label: "사이트 설정"
+    files:
+      - name: "general"
+        label: "일반 설정"
+        file: "_data/settings.json"
+        fields:
+          - { label: "사이트 제목", name: "site_title", widget: "string" }
+          - { label: "로고", name: "logo", widget: "image" }
+          - { label: "전화번호", name: "phone", widget: "string" }
+          - { label: "이메일", name: "email", widget: "string" }
+          - { label: "주소", name: "address", widget: "string" }
+          - { label: "사업자등록번호", name: "business_number", widget: "string" }
+          - { label: "대표자명", name: "representative", widget: "string" }
+      
+      - name: "footer"
+        label: "푸터 설정"
+        file: "_data/footer.json"
+        fields:
+          - { label: "저작권 텍스트", name: "copyright", widget: "string" }
+          - label: "소셜 미디어 링크"
+            name: "social_links"
+            widget: "list"
+            fields:
+              - { label: "플랫폼", name: "platform", widget: "select", options: ["instagram", "youtube", "blog", "facebook"] }
+              - { label: "URL", name: "url", widget: "string" }
+  
+  - name: "sections" # 랜딩 페이지 섹션
+    label: "페이지 섹션"
+    files:
+      - name: "hero"
+        label: "히어로 섹션"
+        file: "_data/sections/hero.json"
+        fields:
+          - { label: "제목", name: "title", widget: "string" }
+          - { label: "부제목", name: "subtitle", widget: "string" }
+          - { label: "버튼 텍스트", name: "button_text", widget: "string" }
+          - { label: "히어로 이미지", name: "image", widget: "image" }
+      
+      - name: "about"
+        label: "소개 섹션"
+        file: "_data/sections/about.json"
+        fields:
+          - { label: "학교명", name: "school", widget: "string" }
+          - { label: "학생명", name: "student_name", widget: "string" }
+          - { label: "소개 텍스트", name: "description", widget: "markdown" }
+          - { label: "학생 이미지", name: "image", widget: "image" }
+      
+      - name: "features"
+        label: "특징 섹션"
+        file: "_data/sections/features.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "섹션 부제목", name: "subtitle", widget: "string" }
+          - { label: "섹션 설명", name: "description", widget: "text" }
+          - label: "특징 항목"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - { label: "아이콘", name: "icon", widget: "image" }
+      
+      - name: "curriculum"
+        label: "커리큘럼 섹션"
+        file: "_data/sections/curriculum.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "섹션 부제목", name: "subtitle", widget: "string" }
+          - { label: "강조 텍스트", name: "highlight_text", widget: "text" }
+          - { label: "커리큘럼 이미지", name: "image", widget: "image" }
+      
+      - name: "process"
+        label: "학습과정 섹션"
+        file: "_data/sections/process.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "상위 제목", name: "upper_title", widget: "string" }
+          - { label: "부제목", name: "subtitle", widget: "string" }
+          - { label: "설명", name: "description", widget: "text" }
+          - label: "단계"
+            name: "steps"
+            widget: "list"
+            fields:
+              - { label: "단계 번호", name: "number", widget: "string" }
+              - { label: "단계 설명", name: "description", widget: "string" }
+      
+      - name: "progress"
+        label: "실력 향상 그래프 섹션"
+        file: "_data/sections/progress.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "섹션 설명", name: "description", widget: "text" }
+          - label: "독해력 데이터"
+            name: "reading_data"
+            widget: "list"
+            field: { label: "값", name: "value", widget: "number", min: 0, max: 100 }
+          - label: "듣기 데이터"
+            name: "listening_data"
+            widget: "list"
+            field: { label: "값", name: "value", widget: "number", min: 0, max: 100 }
+          - label: "어휘력 데이터"
+            name: "vocabulary_data"
+            widget: "list"
+            field: { label: "값", name: "value", widget: "number", min: 0, max: 100 }
+          - label: "문법 데이터"
+            name: "grammar_data"
+            widget: "list"
+            field: { label: "값", name: "value", widget: "number", min: 0, max: 100 }
+          - { label: "학생 후기", name: "testimonial", widget: "text" }
+          - { label: "학생 이름 및 학년", name: "student_info", widget: "string" }
+      
+      - name: "videos"
+        label: "동영상 섹션"
+        file: "_data/sections/videos.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "비디오 플랫폼", name: "video_platform", widget: "select", options: ["youtube", "vimeo"], default: "youtube" }
+          - { label: "비디오 ID", name: "video_id", widget: "string", hint: "유튜브는 URL의 v= 뒤 코드, 비메오는 URL의 마지막 숫자" }
+          - { label: "비디오 설명", name: "description", widget: "text", required: false }
+      
+      - name: "consultation"
+        label: "상담 신청 섹션"
+        file: "_data/sections/consultation.json"
+        fields:
+          - { label: "섹션 제목", name: "title", widget: "string" }
+          - { label: "섹션 설명", name: "description", widget: "text" }
+          - { label: "버튼 텍스트", name: "button_text", widget: "string" }
+          - label: "상담 가능 시간"
+            name: "available_times"
+            widget: "list"
+            field: { label: "시간", name: "time", widget: "string" }

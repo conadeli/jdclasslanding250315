@@ -1,0 +1,161 @@
+# JD클래스 영어 교육 랜딩 페이지
+
+이 프로젝트는 영어 교육 서비스의 랜딩 페이지와 Netlify CMS를 이용한 콘텐츠 관리 시스템을 포함하고 있습니다.
+
+## 기능
+
+- 반응형 랜딩 페이지 디자인
+- 상담 신청 폼(Netlify Forms로 자동 처리)
+- Netlify CMS를 통한 콘텐츠 관리
+- YouTube 비디오 통합
+- 모바일 친화적 디자인
+- 실력 향상 그래프 (Chart.js로 구현)
+
+## Netlify 배포 방법
+
+### 1. GitHub 계정 만들기
+
+1. [GitHub](https://github.com/) 웹사이트에 접속하여 계정을 생성합니다.
+2. 가입 후 이메일 인증을 완료합니다.
+
+### 2. 저장소(Repository) 만들기
+
+1. GitHub 대시보드에서 "New" 버튼을 클릭합니다.
+2. 저장소 이름(예: jd-class-landing)을 입력합니다.
+3. "Public" 옵션을 선택합니다.
+4. "Create repository" 버튼을 클릭합니다.
+
+### 3. 코드 업로드하기
+
+방법 1: GitHub 웹 인터페이스 사용
+1. 생성된 저장소 페이지에서 "uploading an existing file" 링크를 클릭합니다.
+2. 모든 파일을 드래그 앤 드롭하거나 선택하여 업로드합니다.
+3. "Commit changes" 버튼을 클릭합니다.
+
+방법 2: GitHub Desktop 사용
+1. [GitHub Desktop](https://desktop.github.com/)을 다운로드하여 설치합니다.
+2. GitHub 계정으로 로그인합니다.
+3. "File" > "Clone Repository"를 선택하고 생성한 저장소를 선택합니다.
+4. 로컬 경로를 지정하고 "Clone" 버튼을 클릭합니다.
+5. 프로젝트 파일을 해당 폴더에 복사합니다.
+6. 변경사항을 커밋하고 "Push to origin"을 클릭합니다.
+
+### 4. Netlify와 연결하기
+
+1. [Netlify](https://www.netlify.com/)에 로그인합니다.
+2. "New site from Git" 버튼을 클릭합니다.
+3. "GitHub"을 선택하고 인증 과정을 진행합니다.
+4. 방금 만든 저장소를 선택합니다.
+5. 배포 설정에서 다음을 확인합니다:
+   - Build command: 비워둡니다
+   - Publish directory: . (점 하나)
+6. "Deploy site" 버튼을 클릭합니다.
+
+### 5. Netlify Identity 설정하기
+
+1. Netlify 사이트 대시보드에서 "Site settings"를 클릭합니다.
+2. "Identity" 메뉴로 이동하여 "Enable Identity"를 클릭합니다.
+3. "Settings and usage" 섹션에서 "Registration preferences"를 "Invite only"로 설정합니다.
+4. "Services" 섹션에서 "Git Gateway"를 활성화합니다.
+
+### 6. 관리자 초대하기
+
+1. "Identity" 탭에서 "Invite users"를 클릭합니다.
+2. 이메일 주소를 입력하고 "Send"를 클릭합니다.
+3. 초대받은 이메일의 링크를 통해 비밀번호를 설정합니다.
+
+## 관리자 페이지 사용 방법
+
+1. 배포된 사이트에서 `/admin` 경로로 접속합니다 (예: https://your-site.netlify.app/admin/).
+2. 등록한 이메일과 비밀번호로 로그인합니다.
+3. CMS 대시보드에서 다음 항목을 수정할 수 있습니다:
+   - 사이트 설정: 로고, 연락처 정보 등
+   - 히어로
+- 사이트 설정: 로고, 연락처 정보 등
+  - 히어로 섹션: 메인 문구, 이미지
+  - 소개 섹션: 학생 소개 및 이미지
+  - 특징 섹션: 서비스 특징 목록
+  - 커리큘럼 섹션: 커리큘럼 설명 및 이미지
+  - 학습 과정 섹션: 단계별 학습 과정
+  - 실력 향상 그래프 섹션: 그래프 데이터 및 설명
+  - 동영상 섹션: YouTube 비디오 ID
+  - 상담 신청 섹션: 상담 관련 설정
+
+4. 변경사항은 "Publish" 버튼을 클릭하면 자동으로 사이트에 반영됩니다.
+
+## 상담 신청 폼 관리
+
+상담 신청 폼은 Netlify Forms 기능을 사용하여 자동으로 처리됩니다:
+
+1. Netlify 대시보드에서 "Forms" 탭으로 이동합니다.
+2. "Active forms"에서 "consultation" 폼을 확인할 수 있습니다.
+3. 폼 제출 내역을 확인하고 CSV로 내보내기 할 수 있습니다.
+4. 폼 알림 설정:
+  - "Form settings"에서 "Form notifications"을 클릭합니다.
+  - 이메일 알림을 설정하여 새 상담 요청이 들어올 때마다 알림을 받을 수 있습니다.
+
+## 파일 구조
+/
+├── index.html             # 메인 랜딩 페이지
+├── css/
+│   └── style.css          # 스타일시트
+├── js/
+│   └── main.js            # 자바스크립트 기능
+├── admin/
+│   ├── index.html         # 관리자 페이지
+│   └── config.yml         # Netlify CMS 설정
+├── _data/                 # CMS 데이터 저장 폴더 (자동 생성됨)
+├── images/                # 이미지 파일
+│   └── uploads/           # 업로드된 이미지 (자동 생성됨)
+└── netlify.toml           # Netlify 배포 설정
+
+로고 및 브랜드 이미지
+
+로고 (logo.png)
+
+권장 사이즈: 200px × 50px
+형식: PNG (투명 배경)
+
+
+
+섹션별 이미지
+
+히어로 섹션 학생 이미지 (student.jpg)
+
+권장 사이즈: 600px × 800px
+가로세로 비율: 3:4
+
+
+선생님 이미지 (teacher.jpg)
+
+권장 사이즈: 400px × 400px
+형식: 정사각형, 원형 크롭으로 표시됨
+
+
+커리큘럼 이미지 (curriculum.png)
+
+권장 사이즈: 600px × 500px
+
+
+
+아이콘 이미지
+
+기능 아이콘들 (icon-vocabulary.png, icon-reading.png 등)
+
+권장 사이즈: 80px × 80px
+형식: PNG (투명 배경)
+
+
+소셜 미디어 아이콘 (icon-instagram.png, icon-youtube.png, icon-blog.png)
+
+권장 사이즈: 24px × 24px
+형식: PNG (투명 배경) 또는 SVG
+
+
+
+반응형 고려사항
+
+모든 이미지는 고해상도 디스플레이를 위해 실제 표시 크기보다 2배 크게 준비하는 것이 좋습니다 (예: 로고가 화면에 100px × 25px로 표시된다면, 실제 이미지는 200px × 50px로 준비)
+이미지 파일 크기는 웹페이지 로딩 속도를 위해 최적화해야 합니다 (JPEG는 80-90% 품질, PNG는 압축)
+
+이러한 사이즈는 권장사항이며, CSS에서 설정된 크기에 맞춰 자동으로 조정됩니다. 이미지의 가로세로 비율이 중요하므로 비율을 유지하는 것이 좋습니다.
