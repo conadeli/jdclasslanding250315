@@ -1,27 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Chart.js ½ºÅ©¸³Æ® ·Îµå
-    const chartScript = document.createElement('script');
+    var chartScript = document.createElement('script');
     chartScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js';
     document.head.appendChild(chartScript);
     
-    // Chart.js ·Îµå ¿Ï·á ÈÄ ±×·¡ÇÁ ÃÊ±âÈ­ ¹× ÅÇ ±â´É ¼³Á¤
     chartScript.onload = function() {
         initializeCharts();
         
-        // ÅÇ ±â´É ±¸Çö
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const graphItems = document.querySelectorAll('.graph-item');
+        // íƒ­ ê¸°ëŠ¥
+        var tabButtons = document.querySelectorAll('.tab-btn');
+        var graphItems = document.querySelectorAll('.graph-item');
         
         if(tabButtons.length > 0) {
-            tabButtons.forEach(button => {
+            tabButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    // ¸ğµç ÅÇ°ú ±×·¡ÇÁ ºñÈ°¼ºÈ­
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    graphItems.forEach(item => item.classList.remove('active'));
+                    // ëª¨ë“  íƒ­, ê·¸ë˜í”„ ë¹„í™œì„±í™”
+                    tabButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    graphItems.forEach(function(item) { item.classList.remove('active'); });
                     
-                    // Å¬¸¯ÇÑ ÅÇ°ú ¿¬°áµÈ ±×·¡ÇÁ È°¼ºÈ­
+                    // í´ë¦­ëœ íƒ­, í•´ë‹¹ ê·¸ë˜í”„ í™œì„±í™”
                     this.classList.add('active');
-                    const targetGraph = document.getElementById(`${this.dataset.target}-graph`);
+                    var targetGraph = document.getElementById(this.dataset.target + '-graph');
                     if(targetGraph) {
                         targetGraph.classList.add('active');
                     }
@@ -30,35 +28,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // ºñµğ¿À ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­ (À¯Æ©ºê ¶Ç´Â ºñ¸Ş¿À)
+    // ë¹„ë””ì˜¤ í”Œë ˆì´ì–´ ì´ˆê¸°í™”
     function initializeVideoPlayer() {
-        const videoSection = document.getElementById('video-player');
+        var videoSection = document.getElementById('video-player');
         if (!videoSection) return;
         
-        // ±âº»°ª ¼³Á¤ (³ªÁß¿¡ CMS¿¡¼­ µ¥ÀÌÅÍ¸¦ ·ÎµåÇÒ ¼ö ÀÖÀ½)
-        let platform = 'youtube'; // ¶Ç´Â 'vimeo'
-        let videoId = 'VIDEO_ID'; // »ùÇÃ ID
+        // ì„ì‹œ í•˜ë“œì½”ë”© (ìœ íŠœë¸Œ or ë¹„ë©”ì˜¤)
+        var platform = 'youtube';
+        var videoId = 'VIDEO_ID';
         
-        let embedHtml = '';
+        var embedHtml = '';
         if (platform === 'youtube') {
-            embedHtml = `<iframe width="100%" height="500" src="https://www.youtube.com/embed/${videoId}" 
-                         title="¼ö¾÷ ¿µ»ó" frameborder="0" 
-                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                         allowfullscreen></iframe>`;
+            embedHtml = '<iframe width="100%" height="500" src="https://www.youtube.com/embed/' + videoId + '" ' +
+                        'title="ìˆ˜ì—… ì˜ìƒ" frameborder="0" ' +
+                        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+                        'allowfullscreen></iframe>';
         } else if (platform === 'vimeo') {
-            embedHtml = `<iframe src="https://player.vimeo.com/video/${videoId}" 
-                         width="100%" height="500" frameborder="0" 
-                         allow="autoplay; fullscreen; picture-in-picture" 
-                         allowfullscreen></iframe>`;
+            embedHtml = '<iframe src="https://player.vimeo.com/video/' + videoId + '" ' +
+                        'width="100%" height="500" frameborder="0" ' +
+                        'allow="autoplay; fullscreen; picture-in-picture" ' +
+                        'allowfullscreen></iframe>';
         }
         videoSection.innerHTML = embedHtml;
     }
     
-    // ºñµğ¿À ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­
     initializeVideoPlayer();
     
-    // ½ºÅ©·Ñ ½Ã Çì´õ ½ºÅ¸ÀÏ º¯°æ
-    const header = document.querySelector('header');
+    // í—¤ë” ìŠ¤í¬ë¡¤ ìŠ¤íƒ€ì¼
+    var header = document.querySelector('header');
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
@@ -69,43 +66,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // »ó´ã ½ÅÃ» Æû °ËÁõ
-    const consultationForm = document.getElementById('consultationForm');
+    // ìƒë‹´ í¼ ê²€ì¦
+    var consultationForm = document.getElementById('consultationForm');
     if (consultationForm) {
         consultationForm.addEventListener('submit', function(event) {
-            const phoneInput = document.getElementById('parentPhone');
-            const phonePattern = /^\d{3}-\d{4}-\d{4}$/;
-            
+            var phoneInput = document.getElementById('parentPhone');
+            var phonePattern = /^\d{3}-\d{4}-\d{4}$/;
             if (!phonePattern.test(phoneInput.value)) {
                 event.preventDefault();
-                alert('¿¬¶ôÃ³¸¦ 010-0000-0000 Çü½ÄÀ¸·Î ÀÔ·ÂÇØÁÖ¼¼¿ä.');
+                alert('ì—°ë½ì²˜ë¥¼ 010-0000-0000 í˜•ì‹ìœ¼ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”.');
                 phoneInput.focus();
                 return false;
             }
             
-            // »ó´ã ³¯Â¥ À¯È¿¼º °Ë»ç
-            const dateInput = document.getElementById('consultDate');
-            const selectedDate = new Date(dateInput.value);
-            const today = new Date();
+            var dateInput = document.getElementById('consultDate');
+            var selectedDate = new Date(dateInput.value);
+            var today = new Date();
             if (selectedDate < today) {
                 event.preventDefault();
-                alert('¿À´Ã ÀÌÈÄÀÇ ³¯Â¥¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.');
+                alert('ì˜¤ëŠ˜ ì´í›„ì˜ ë‚ ì§œë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
                 dateInput.focus();
                 return false;
             }
             
-            // Æû Á¦Ãâ ½Ã ·Îµù ¸Ş½ÃÁö Ç¥½Ã
-            const submitButton = consultationForm.querySelector('button[type="submit"]');
-            submitButton.innerHTML = 'Á¦Ãâ Áß...';
+            var submitButton = consultationForm.querySelector('button[type="submit"]');
+            submitButton.innerHTML = 'ì œì¶œ ì¤‘...';
             submitButton.disabled = true;
-            
             return true;
         });
         
-        // ÀüÈ­¹øÈ£ ÀÔ·Â ½Ã ÀÚµ¿ ÇÏÀÌÇÂ Ãß°¡
-        const phoneInput = document.getElementById('parentPhone');
+        // ì „í™”ë²ˆí˜¸ ì…ë ¥ ì‹œ í•˜ì´í”ˆ ìë™
+        var phoneInput = document.getElementById('parentPhone');
         phoneInput.addEventListener('input', function(e) {
-            const value = e.target.value.replace(/[^0-9]/g, '');
+            var value = e.target.value.replace(/[^0-9]/g, '');
             if (value.length <= 3) {
                 e.target.value = value;
             } else if (value.length <= 7) {
@@ -116,24 +109,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ½ºÅ©·Ñ ½Ã ¼½¼Ç ¾Ö´Ï¸ŞÀÌ¼Ç È¿°ú
-    const sections = document.querySelectorAll('section');
+    // ìŠ¤í¬ë¡¤ ì‹œ ì„¹ì…˜ ì• ë‹ˆë©”ì´ì…˜
+    var sections = document.querySelectorAll('section');
     window.addEventListener('scroll', function() {
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
+        sections.forEach(function(section) {
+            var sectionTop = section.getBoundingClientRect().top;
             if (sectionTop < window.innerHeight * 0.75) {
                 section.classList.add('visible');
             }
         });
     });
     
-    // ½º¹«½º ½ºÅ©·Ñ ±¸Çö
-    const navLinks = document.querySelectorAll('nav a, .hero a');
-    navLinks.forEach(link => {
+    // ìŠ¤ë¬´ìŠ¤ ìŠ¤í¬ë¡¤
+    var navLinks = document.querySelectorAll('nav a, .hero a');
+    navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            var targetId = this.getAttribute('href');
+            var targetSection = document.querySelector(targetId);
             window.scrollTo({
                 top: targetSection.offsetTop - 80,
                 behavior: 'smooth'
@@ -141,14 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ±×·¡ÇÁ ÃÊ±âÈ­ ÇÔ¼ö
+    // ì°¨íŠ¸ ì´ˆê¸°í™”
     function initializeCharts() {
-        // Â÷Æ® ¿ä¼Ò°¡ ¾øÀ¸¸é ¸®ÅÏ
         if (!document.getElementById('readingChart')) return;
         
-        // °øÅë Â÷Æ® ¼³Á¤
-        const months = ['½ÃÀÛ', '1°³¿ù', '2°³¿ù', '3°³¿ù', '4°³¿ù', '5°³¿ù', '6°³¿ù'];
-        const chartOptions = {
+        var months = ['ì‹œì‘', '1ê°œì›”', '2ê°œì›”', '3ê°œì›”', '4ê°œì›”', '5ê°œì›”', '6ê°œì›”'];
+        var chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -157,13 +148,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     max: 100,
                     title: {
                         display: true,
-                        text: '´É·Â Á¡¼ö (100Á¡ ¸¸Á¡)'
+                        text: 'ëŠ¥ë ¥ ì ìˆ˜ (100ì  ë§Œì )'
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: 'ÇĞ½À ±â°£'
+                        text: 'í•™ìŠµ ê¸°ê°„'
                     }
                 }
             },
@@ -175,21 +166,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw}Á¡`;
+                            return context.dataset.label + ': ' + context.raw + 'ì ';
                         }
                     }
                 }
             }
         };
         
-        // 1. µ¶ÇØ·Â Â÷Æ®
-        const readingCtx = document.getElementById('readingChart').getContext('2d');
+        // ë…í•´ë ¥
+        var readingCtx = document.getElementById('readingChart').getContext('2d');
         new Chart(readingCtx, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [{
-                    label: 'µ¶ÇØ·Â Á¡¼ö',
+                    label: 'ë…í•´ë ¥ ì ìˆ˜',
                     data: [45, 52, 58, 67, 75, 82, 90],
                     borderColor: '#FF8C00',
                     backgroundColor: 'rgba(255, 140, 0, 0.1)',
@@ -200,14 +191,14 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 2. µè±â Â÷Æ®
-        const listeningCtx = document.getElementById('listeningChart').getContext('2d');
+        // ë“£ê¸°
+        var listeningCtx = document.getElementById('listeningChart').getContext('2d');
         new Chart(listeningCtx, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [{
-                    label: 'µè±â Á¡¼ö',
+                    label: 'ë“£ê¸° ì ìˆ˜',
                     data: [40, 48, 55, 63, 72, 80, 88],
                     borderColor: '#4CAF50',
                     backgroundColor: 'rgba(76, 175, 80, 0.1)',
@@ -218,14 +209,14 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 3. ¾îÈÖ·Â Â÷Æ®
-        const vocabularyCtx = document.getElementById('vocabularyChart').getContext('2d');
+        // ì–´íœ˜ë ¥
+        var vocabularyCtx = document.getElementById('vocabularyChart').getContext('2d');
         new Chart(vocabularyCtx, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [{
-                    label: '¾îÈÖ·Â Á¡¼ö',
+                    label: 'ì–´íœ˜ë ¥ ì ìˆ˜',
                     data: [42, 50, 60, 70, 78, 85, 92],
                     borderColor: '#2196F3',
                     backgroundColor: 'rgba(33, 150, 243, 0.1)',
@@ -236,14 +227,14 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 4. ¹®¹ı Â÷Æ®
-        const grammarCtx = document.getElementById('grammarChart').getContext('2d');
+        // ë¬¸ë²•
+        var grammarCtx = document.getElementById('grammarChart').getContext('2d');
         new Chart(grammarCtx, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [{
-                    label: '¹®¹ı Á¡¼ö',
+                    label: 'ë¬¸ë²• ì ìˆ˜',
                     data: [48, 55, 62, 70, 77, 84, 91],
                     borderColor: '#9C27B0',
                     backgroundColor: 'rgba(156, 39, 176, 0.1)',
@@ -254,43 +245,43 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 5. Á¾ÇÕ Á¡¼ö Â÷Æ®
-        const overallCtx = document.getElementById('overallChart').getContext('2d');
+        // ì¢…í•© ì ìˆ˜
+        var overallCtx = document.getElementById('overallChart').getContext('2d');
         new Chart(overallCtx, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [
                     {
-                        label: 'µ¶ÇØ·Â',
+                        label: 'ë…í•´ë ¥',
                         data: [45, 52, 58, 67, 75, 82, 90],
                         borderColor: '#FF8C00',
                         backgroundColor: 'transparent',
                         borderWidth: 2
                     },
                     {
-                        label: 'µè±â',
+                        label: 'ë“£ê¸°',
                         data: [40, 48, 55, 63, 72, 80, 88],
                         borderColor: '#4CAF50',
                         backgroundColor: 'transparent',
                         borderWidth: 2
                     },
                     {
-                        label: '¾îÈÖ·Â',
+                        label: 'ì–´íœ˜ë ¥',
                         data: [42, 50, 60, 70, 78, 85, 92],
                         borderColor: '#2196F3',
                         backgroundColor: 'transparent',
                         borderWidth: 2
                     },
                     {
-                        label: '¹®¹ı',
+                        label: 'ë¬¸ë²•',
                         data: [48, 55, 62, 70, 77, 84, 91],
                         borderColor: '#9C27B0',
                         backgroundColor: 'transparent',
                         borderWidth: 2
                     },
                     {
-                        label: 'Æò±Õ Á¡¼ö',
+                        label: 'í‰ê·  ì ìˆ˜',
                         data: [44, 51, 59, 68, 76, 83, 90],
                         borderColor: '#FF5722',
                         backgroundColor: 'rgba(255, 87, 34, 0.1)',
