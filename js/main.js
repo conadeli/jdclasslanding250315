@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chartScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js';
     document.head.appendChild(chartScript);
     
-    // Chart.js 로드 완료 후 그래프 초기화
+    // Chart.js 로드 완료 후 그래프 초기화 및 탭 기능 설정
     chartScript.onload = function() {
         initializeCharts();
         
@@ -35,15 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const videoSection = document.getElementById('video-player');
         if (!videoSection) return;
         
-        // 기본값 설정 (나중에 CMS에서 로드할 데이터)
+        // 기본값 설정 (나중에 CMS에서 데이터를 로드할 수 있음)
         let platform = 'youtube'; // 또는 'vimeo'
         let videoId = 'VIDEO_ID'; // 샘플 ID
         
-        // CMS에서 데이터를 가져오는 코드를 추가할 수 있음
-        // 여기서는 간단히 하드코딩된 값 사용
-        
         let embedHtml = '';
-        
         if (platform === 'youtube') {
             embedHtml = `<iframe width="100%" height="500" src="https://www.youtube.com/embed/${videoId}" 
                          title="수업 영상" frameborder="0" 
@@ -55,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
                          allow="autoplay; fullscreen; picture-in-picture" 
                          allowfullscreen></iframe>`;
         }
-        
         videoSection.innerHTML = embedHtml;
     }
     
@@ -92,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('consultDate');
             const selectedDate = new Date(dateInput.value);
             const today = new Date();
-            
             if (selectedDate < today) {
                 event.preventDefault();
                 alert('오늘 이후의 날짜를 선택해주세요.');
@@ -105,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.innerHTML = '제출 중...';
             submitButton.disabled = true;
             
-            // 폼이 성공적으로 제출되면 감사 메시지 표시 (Netlify Forms에서 자동 처리됨)
             return true;
         });
         
@@ -123,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 스크롤 시 애니메이션 효과
+    // 스크롤 시 섹션 애니메이션 효과
     const sections = document.querySelectorAll('section');
     window.addEventListener('scroll', function() {
         sections.forEach(section => {
@@ -141,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
             window.scrollTo({
                 top: targetSection.offsetTop - 80,
                 behavior: 'smooth'
@@ -189,8 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         };
-        
-        // 각 차트별 데이터 및 생성
         
         // 1. 독해력 차트
         const readingCtx = document.getElementById('readingChart').getContext('2d');
@@ -275,53 +265,41 @@ document.addEventListener('DOMContentLoaded', function() {
                         label: '독해력',
                         data: [45, 52, 58, 67, 75, 82, 90],
                         borderColor: '#FF8C00',
-                        backgroundColor
-                      // 5. 종합 점수 차트
-       const overallCtx = document.getElementById('overallChart').getContext('2d');
-       new Chart(overallCtx, {
-           type: 'line',
-           data: {
-               labels: months,
-               datasets: [
-                   {
-                       label: '독해력',
-                       data: [45, 52, 58, 67, 75, 82, 90],
-                       borderColor: '#FF8C00',
-                       backgroundColor: 'transparent',
-                       borderWidth: 2
-                   },
-                   {
-                       label: '듣기',
-                       data: [40, 48, 55, 63, 72, 80, 88],
-                       borderColor: '#4CAF50',
-                       backgroundColor: 'transparent',
-                       borderWidth: 2
-                   },
-                   {
-                       label: '어휘력',
-                       data: [42, 50, 60, 70, 78, 85, 92],
-                       borderColor: '#2196F3',
-                       backgroundColor: 'transparent',
-                       borderWidth: 2
-                   },
-                   {
-                       label: '문법',
-                       data: [48, 55, 62, 70, 77, 84, 91],
-                       borderColor: '#9C27B0',
-                       backgroundColor: 'transparent',
-                       borderWidth: 2
-                   },
-                   {
-                       label: '평균 점수',
-                       data: [44, 51, 59, 68, 76, 83, 90],
-                       borderColor: '#FF5722',
-                       backgroundColor: 'rgba(255, 87, 34, 0.1)',
-                       borderWidth: 3,
-                       fill: true
-                   }
-               ]
-           },
-           options: chartOptions
-       });
-   }
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '듣기',
+                        data: [40, 48, 55, 63, 72, 80, 88],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '어휘력',
+                        data: [42, 50, 60, 70, 78, 85, 92],
+                        borderColor: '#2196F3',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '문법',
+                        data: [48, 55, 62, 70, 77, 84, 91],
+                        borderColor: '#9C27B0',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '평균 점수',
+                        data: [44, 51, 59, 68, 76, 83, 90],
+                        borderColor: '#FF5722',
+                        backgroundColor: 'rgba(255, 87, 34, 0.1)',
+                        borderWidth: 3,
+                        fill: true
+                    }
+                ]
+            },
+            options: chartOptions
+        });
+    }
 });
