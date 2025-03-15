@@ -414,10 +414,16 @@ nav ul li a:hover {
     gap: 30px;
 }
 
-/* 캔버스 스타일: 높이 자동 적용 */
+/* 캔버스: 높이 auto로 설정, 데스크톱에서만 max-height 제한 */
 canvas {
     width: 100%;
     height: auto;
+}
+
+@media (min-width: 992px) {
+  canvas {
+    max-height: 500px; /* 데스크톱에서 차트가 너무 커지지 않도록 제한 */
+  }
 }
 
 .graph-desc {
@@ -486,17 +492,16 @@ canvas {
        flex-direction: row;
    }
    
-   canvas {
-       width: 60%;
+   /* canvas {
+       width: 60%;  // 필요하다면 해제하거나 조정
    }
-   
    .graph-desc {
        width: 40%;
        border-top: none;
        border-left: 1px solid #eee;
        padding-top: 0;
        padding-left: 30px;
-   }
+   } */
 }
 
 /* 비디오 섹션 */
@@ -615,15 +620,6 @@ footer {
    opacity: 0.7;
 }
 
-.copyright {
-   text-align: center;
-   border-top: 1px solid rgba(255, 255, 255, 0.1);
-   padding-top: 20px;
-   color: #999;
-   font-size: 0.85rem;
-}
-
-/* 반응형 스타일 */
 @media (max-width: 992px) {
    .hero .container,
    .about .container,

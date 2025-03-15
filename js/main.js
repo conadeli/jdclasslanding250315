@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (tabButtons.length > 0) {
             tabButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    // 모든 탭과 그래프 비활성화
+                    // 모든 탭, 그래프 비활성화
                     tabButtons.forEach(function(btn) { btn.classList.remove('active'); });
                     graphItems.forEach(function(item) { item.classList.remove('active'); });
                     
-                    // 클릭된 탭과 연결된 그래프 활성화
+                    // 클릭된 탭, 해당 그래프 활성화
                     this.classList.add('active');
                     var targetGraph = document.getElementById(this.dataset.target + '-graph');
                     if (targetGraph) {
@@ -141,11 +141,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!document.getElementById('readingChart')) return;
         
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
-        // 모바일에서도 적절한 비율 유지를 위해 aspectRatio 옵션 추가
         var chartOptions = {
             responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 2,
+            maintainAspectRatio: true, /* 비율 유지 */
+            aspectRatio: 2,           /* 가로:세로 = 2:1 */
             scales: {
                 y: {
                     beginAtZero: true,
