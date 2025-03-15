@@ -12,12 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         item.style.display = 'none';
     });
 
-if (tabButtons.length > 0) {
-    tabButtons[0].classList.add('active');
-    const firstGraph = document.getElementById(tabButtons[0].dataset.target + '-graph');
-    if (firstGraph) {
-       firstGraph.style.display = 'flex'; // 이 줄 추가
-}
+    if (tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+        const firstGraph = document.getElementById(tabButtons[0].dataset.target + '-graph');
+        if (firstGraph) {
+            firstGraph.style.display = 'flex';
+        }
+    }
 
     tabButtons.forEach(function (button) {
         button.addEventListener('click', function () {
@@ -31,10 +32,11 @@ if (tabButtons.length > 0) {
 
             this.classList.add('active');
             const targetGraph = document.getElementById(this.dataset.target + '-graph');
-          if (targetGraph) {
-             targetGraph.classList.add('active');
-    targetGraph.style.display = 'flex'; // 이 줄 추가
-}
+            if (targetGraph) {
+                targetGraph.classList.add('active');
+                targetGraph.style.display = 'flex';
+            }
+        });
     });
 });
 
