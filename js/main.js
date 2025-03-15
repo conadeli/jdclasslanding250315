@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
     // 비디오 플레이어 초기화 (반응형 처리)
     function initializeVideoPlayer() {
         var videoSection = document.getElementById('video-player');
