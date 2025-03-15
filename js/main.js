@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
         var tabButtons = document.querySelectorAll('.tab-btn');
         var graphItems = document.querySelectorAll('.graph-item');
         
-        if(tabButtons.length > 0) {
+        if (tabButtons.length > 0) {
             tabButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    // 모든 탭, 그래프 비활성화
+                    // 모든 탭과 그래프 비활성화
                     tabButtons.forEach(function(btn) { btn.classList.remove('active'); });
                     graphItems.forEach(function(item) { item.classList.remove('active'); });
                     
-                    // 클릭된 탭, 해당 그래프 활성화
+                    // 클릭된 탭과 연결된 그래프 활성화
                     this.classList.add('active');
                     var targetGraph = document.getElementById(this.dataset.target + '-graph');
-                    if(targetGraph) {
+                    if (targetGraph) {
                         targetGraph.classList.add('active');
                     }
                 });
@@ -28,33 +28,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // 비디오 플레이어 초기화
+    // 비디오 플레이어 초기화 (반응형 처리)
     function initializeVideoPlayer() {
         var videoSection = document.getElementById('video-player');
         if (!videoSection) return;
         
-        // 임시 하드코딩 (유튜브 or 비메오)
+        // 임시 하드코딩 (유튜브 또는 비메오)
         var platform = 'youtube';
-        var videoId = 'VIDEO_ID';
+        var videoId = 'VIDEO_ID'; // 실제 유튜브 영상 ID로 교체하세요.
         
         var embedHtml = '';
         if (platform === 'youtube') {
-            embedHtml = '<iframe width="100%" height="500" src="https://www.youtube.com/embed/' + videoId + '" ' +
+            embedHtml = '<iframe src="https://www.youtube.com/embed/' + videoId + '" ' +
                         'title="수업 영상" frameborder="0" ' +
                         'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
                         'allowfullscreen></iframe>';
         } else if (platform === 'vimeo') {
             embedHtml = '<iframe src="https://player.vimeo.com/video/' + videoId + '" ' +
-                        'width="100%" height="500" frameborder="0" ' +
+                        'frameborder="0" ' +
                         'allow="autoplay; fullscreen; picture-in-picture" ' +
                         'allowfullscreen></iframe>';
         }
-        videoSection.innerHTML = embedHtml;
+        
+        // iframe을 반응형 비디오 컨테이너로 감싸기
+        videoSection.innerHTML = '<div class="video-container">' + embedHtml + '</div>';
     }
     
     initializeVideoPlayer();
     
-    // 헤더 스크롤 스타일
+    // 헤더 스크롤 스타일 변경
     var header = document.querySelector('header');
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
@@ -65,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.padding = '15px 0';
         }
     });
-
+    
     // 상담 폼 검증
     var consultationForm = document.getElementById('consultationForm');
     if (consultationForm) {
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return true;
         });
         
-        // 전화번호 입력 시 하이픈 자동
+        // 전화번호 입력 시 하이픈 자동 추가
         var phoneInput = document.getElementById('parentPhone');
         phoneInput.addEventListener('input', function(e) {
             var value = e.target.value.replace(/[^0-9]/g, '');
@@ -109,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 스크롤 시 섹션 애니메이션
+    // 스크롤 시 섹션 애니메이션 효과
     var sections = document.querySelectorAll('section');
     window.addEventListener('scroll', function() {
         sections.forEach(function(section) {
@@ -120,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 스무스 스크롤
+    // 스무스 스크롤 구현
     var navLinks = document.querySelectorAll('nav a, .hero a');
     navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
@@ -134,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 차트 초기화
+    // 차트 초기화 함수
     function initializeCharts() {
         if (!document.getElementById('readingChart')) return;
         
@@ -173,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        // 독해력
+        // 독해력 차트
         var readingCtx = document.getElementById('readingChart').getContext('2d');
         new Chart(readingCtx, {
             type: 'line',
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 듣기
+        // 듣기 차트
         var listeningCtx = document.getElementById('listeningChart').getContext('2d');
         new Chart(listeningCtx, {
             type: 'line',
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 어휘력
+        // 어휘력 차트
         var vocabularyCtx = document.getElementById('vocabularyChart').getContext('2d');
         new Chart(vocabularyCtx, {
             type: 'line',
@@ -227,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 문법
+        // 문법 차트
         var grammarCtx = document.getElementById('grammarChart').getContext('2d');
         new Chart(grammarCtx, {
             type: 'line',
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: chartOptions
         });
         
-        // 종합 점수
+        // 종합 점수 차트
         var overallCtx = document.getElementById('overallChart').getContext('2d');
         new Chart(overallCtx, {
             type: 'line',
