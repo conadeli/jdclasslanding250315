@@ -16,8 +16,7 @@ if (tabButtons.length > 0) {
     tabButtons[0].classList.add('active');
     const firstGraph = document.getElementById(tabButtons[0].dataset.target + '-graph');
     if (firstGraph) {
-        firstGraph.classList.add('active'); // style 직접 설정이 아닌 클래스 조작
-    }
+       firstGraph.style.display = 'flex'; // 이 줄 추가
 }
 
     tabButtons.forEach(function (button) {
@@ -33,8 +32,9 @@ if (tabButtons.length > 0) {
             this.classList.add('active');
             const targetGraph = document.getElementById(this.dataset.target + '-graph');
           if (targetGraph) {
-            targetGraph.classList.add('active'); // style 직접 설정이 아닌 클래스 조작
-        }
+             targetGraph.classList.add('active');
+    targetGraph.style.display = 'flex'; // 이 줄 추가
+}
     });
 });
 
