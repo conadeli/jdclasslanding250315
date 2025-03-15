@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         item.style.display = 'none';
     });
 
-    if (tabButtons.length > 0) {
-        tabButtons[0].classList.add('active');
-        const firstGraph = document.getElementById(tabButtons[0].dataset.target + '-graph');
-        if (firstGraph) {
-            firstGraph.style.display = 'block';
-        }
+if (tabButtons.length > 0) {
+    tabButtons[0].classList.add('active');
+    const firstGraph = document.getElementById(tabButtons[0].dataset.target + '-graph');
+    if (firstGraph) {
+        firstGraph.classList.add('active'); // style 직접 설정이 아닌 클래스 조작
     }
+}
 
     tabButtons.forEach(function (button) {
         button.addEventListener('click', function () {
@@ -32,10 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             this.classList.add('active');
             const targetGraph = document.getElementById(this.dataset.target + '-graph');
-            if (targetGraph) {
-                targetGraph.style.display = 'block';
-            }
-        });
+          if (targetGraph) {
+            targetGraph.classList.add('active'); // style 직접 설정이 아닌 클래스 조작
+        }
     });
 });
 
