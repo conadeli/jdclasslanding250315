@@ -141,9 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!document.getElementById('readingChart')) return;
         
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
+        // 모바일에서도 적절한 비율 유지를 위해 aspectRatio 옵션 추가
         var chartOptions = {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
+            aspectRatio: 2,
             scales: {
                 y: {
                     beginAtZero: true,
