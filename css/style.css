@@ -396,35 +396,36 @@ nav ul li a:hover {
 
 /* 그래프 컨테이너 수정 */
 .graph-container {
-    max-width: 100%; /* 900px에서 100%로 변경 */
+    max-width: 100%;
     margin: 0 auto;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     padding: 30px;
     margin-bottom: 40px;
-    min-height: 400px; /* 최소 높이 설정 추가 */
+    min-height: 400px;
 }
 
-/* 각 그래프 섹션 */
+/* 각 그래프 섹션 - 더 강력한 숨김 적용 */
 .graph-item {
-    display: none; /* 기본적으로 모든 그래프 숨김 */
+    display: none !important; /* !important 추가 */
 }
 
-.graph-item.active {
-    display: flex; /* active 클래스가 있는 그래프만 표시 */
+/* active 클래스는 JS에서 직접 style 속성으로 처리하므로 제거하고 주석 처리 */
+/* .graph-item.active {
+    display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
-    width: 100%; /* 너비 100%로 설정 추가 */
-}
+    width: 100%;
+} */
 
-/* 데스크톱에서 세로 배치 유지로 변경 */
-@media (min-width: 992px) {
+/* 데스크톱에서 세로 배치 유지 - JS에서 처리하므로 제거하고 주석 처리 */
+/* @media (min-width: 992px) {
     .graph-item.active {
-        flex-direction: column; /* row에서 column으로 변경 */
+        flex-direction: column;
     }
-}
+} */
 
 /* 캔버스 설정 수정 */
 canvas {
@@ -436,7 +437,7 @@ canvas {
 /* 데스크톱에서 차트 높이 제한 제거 */
 @media (min-width: 992px) {
     canvas {
-        max-height: none; /* 높이 제한 제거 */
+        max-height: none;
     }
 }
 
@@ -444,14 +445,14 @@ canvas {
 .graph-desc {
     border-top: 1px solid #eee;
     padding-top: 20px;
-    width: 100%; /* 너비 100% 추가 */
+    width: 100%;
 }
 
 /* 데스크톱에서 그래프 설명 스타일 수정 */
 @media (min-width: 992px) {
     .graph-desc {
-        border-left: none; /* 왼쪽 테두리 제거 */
-        border-top: 1px solid #eee; /* 상단 테두리 유지 */
+        border-left: none;
+        border-top: 1px solid #eee;
         padding-left: 0;
         margin-top: 20px;
     }

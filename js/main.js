@@ -4,50 +4,50 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(chartScript);
     
     chartScript.onload = function() {
+        // 먼저 차트 초기화
         initializeCharts();
-        initializeTabs(); // 추가된 함수 호출
         
-        // 탭 기능
+        // 그 다음 탭 초기화
         var tabButtons = document.querySelectorAll('.tab-btn');
         var graphItems = document.querySelectorAll('.graph-item');
         
-        if (tabButtons.length > 0) {
-            tabButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    // 모든 탭, 그래프 비활성화
-                    tabButtons.forEach(function(btn) { btn.classList.remove('active'); });
-                    graphItems.forEach(function(item) { item.classList.remove('active'); });
-                    
-                    // 클릭된 탭, 해당 그래프 활성화
-                    this.classList.add('active');
-                    var targetGraph = document.getElementById(this.dataset.target + '-graph');
-                    if (targetGraph) {
-                        targetGraph.classList.add('active');
-                    }
-                });
-            });
-        }
-    };
-    
-    // 탭 기능 초기화 - 첫 번째 탭만 활성화, 나머지는 비활성화 (새로 추가)
-    function initializeTabs() {
-        var tabButtons = document.querySelectorAll('.tab-btn');
-        var graphItems = document.querySelectorAll('.graph-item');
-        
-        // 모든 그래프 숨기기
+        // 모든 그래프 숨기기 (직접 style 속성 사용)
         graphItems.forEach(function(item) {
-            item.classList.remove('active');
+            item.style.display = 'none'; // classList 대신 직접 style 속성 설정
         });
         
-        // 첫 번째 탭의 그래프만 보이기
-        if (tabButtons.length > 0 && graphItems.length > 0) {
+        // 첫 번째 탭 활성화
+        if (tabButtons.length > 0) {
+            tabButtons[0].classList.add('active');
+            
+            // 첫 번째 탭의 그래프만 보이기
             var firstTabTarget = tabButtons[0].dataset.target;
             var firstGraph = document.getElementById(firstTabTarget + '-graph');
             if (firstGraph) {
-                firstGraph.classList.add('active');
+                firstGraph.style.display = 'flex'; // classList 대신 직접 style 속성 설정
             }
         }
-    }
+        
+        // 탭 클릭 이벤트
+        tabButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                // 모든 탭, 그래프 비활성화
+                tabButtons.forEach(function(btn) { 
+                    btn.classList.remove('active'); 
+                });
+                graphItems.forEach(function(item) { 
+                    item.style.display = 'none'; // classList 대신 직접 style 속성 설정
+                });
+                
+                // 클릭된 탭, 해당 그래프 활성화
+                this.classList.add('active');
+                var targetGraph = document.getElementById(this.dataset.target + '-graph');
+                if (targetGraph) {
+                    targetGraph.style.display = 'flex'; // classList 대신 직접 style 속성 설정
+                }
+            });
+        });
+    };
     // 비디오 플레이어 초기화 (반응형 처리)
     function initializeVideoPlayer() {
         var videoSection = document.getElementById('video-player');
