@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     chartScript.onload = function() {
         initializeCharts();
+        initializeTabs(); // 추가된 함수 호출
         
         // 탭 기능
         var tabButtons = document.querySelectorAll('.tab-btn');
@@ -28,6 +29,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    // 탭 기능 초기화 - 첫 번째 탭만 활성화, 나머지는 비활성화 (새로 추가)
+    function initializeTabs() {
+        var tabButtons = document.querySelectorAll('.tab-btn');
+        var graphItems = document.querySelectorAll('.graph-item');
+        
+        // 모든 그래프 숨기기
+        graphItems.forEach(function(item) {
+            item.classList.remove('active');
+        });
+        
+        // 첫 번째 탭의 그래프만 보이기
+        if (tabButtons.length > 0 && graphItems.length > 0) {
+            var firstTabTarget = tabButtons[0].dataset.target;
+            var firstGraph = document.getElementById(firstTabTarget + '-graph');
+            if (firstGraph) {
+                firstGraph.classList.add('active');
+            }
+        }
+    }
     // 비디오 플레이어 초기화 (반응형 처리)
     function initializeVideoPlayer() {
         var videoSection = document.getElementById('video-player');
@@ -136,45 +156,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 차트 초기화 함수
+      // 차트 초기화 함수
     function initializeCharts() {
         if (!document.getElementById('readingChart')) return;
         
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
-var chartOptions = {
-    responsive: true,
-    maintainAspectRatio: true, // false에서 true로 변경
-    aspectRatio: 2.5, // 비율 조정
-    scales: {
-        y: {
-            beginAtZero: true,
-            max: 100,
-            title: {
-                display: true,
-                text: '능력 점수 (100점 만점)'
-            }
-        },
-        x: {
-            title: {
-                display: true,
-                text: '학습 기간'
-            }
-        }
-    },
-    plugins: {
-        legend: {
-            display: true,
-            position: 'top'
-        },
-        tooltip: {
-            callbacks: {
-                label: function(context) {
-                    return context.dataset.label + ': ' + context.raw + '점';
+        var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: true,  // false에서 true로 변경
+            aspectRatio: 2.5,           // 1.5에서 2.5로 변경
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: '능력 점수 (100점 만점)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '학습 기간'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.raw + '점';
+                        }
+                    }
                 }
             }
-        }
-    }
-};
+        };
+
 
         
         // 독해력 차트
