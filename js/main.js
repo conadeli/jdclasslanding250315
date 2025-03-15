@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var videoSection = document.getElementById('video-player');
         if (!videoSection) return;
         
-        // 임시 하드코딩 (유튜브 또는 비메오)
+        // 임시 하드코딩 (유튜브 or 비메오)
         var platform = 'youtube';
-        var videoId = 'VIDEO_ID'; // 실제 유튜브 영상 ID로 교체하세요.
+        var videoId = 'VIDEO_ID'; // 실제 유튜브 영상 ID로 교체
         
         var embedHtml = '';
         if (platform === 'youtube') {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var chartOptions = {
             responsive: true,
             maintainAspectRatio: true, /* 비율 유지 */
-            aspectRatio: 2,           /* 가로:세로 = 2:1 */
+            aspectRatio: 2,           /* 가로:세로 = 2:1 (필요 시 2.5~3 등 조정 가능) */
             scales: {
                 y: {
                     beginAtZero: true,
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        // 독해력 차트
+        // 예시: 독해력 차트
         var readingCtx = document.getElementById('readingChart').getContext('2d');
         new Chart(readingCtx, {
             type: 'line',
