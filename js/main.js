@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var chartScript = document.createElement('script');
-    chartScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js';
-    document.head.appendChild(chartScript);
+    // Chart.js 로딩 코드 제거 (HTML에서 이미 로드)
     
-    chartScript.onload = function() {
-        // 먼저 차트 초기화
-        initializeCharts();
-        
-        // 그 다음 탭 초기화
-        var tabButtons = document.querySelectorAll('.tab-btn');
-        var graphItems = document.querySelectorAll('.graph-item');
+    // 직접 초기화 수행
+    initializeCharts();
+    
+    // 그 다음 탭 초기화
+    var tabButtons = document.querySelectorAll('.tab-btn');
+    var graphItems = document.querySelectorAll('.graph-item');
         
         // 모든 그래프 숨기기 (직접 style 속성 사용)
         graphItems.forEach(function(item) {
@@ -162,59 +159,67 @@ document.addEventListener('DOMContentLoaded', function() {
         
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
         var chartOptions = {
-            responsive: true,
-            maintainAspectRatio: true,  // false에서 true로 변경
-            aspectRatio: 2.5,           // 1.5에서 2.5로 변경
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    title: {
-                        display: true,
-                        text: '능력 점수 (100점 만점)'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: '학습 기간'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + context.raw + '점';
-                        }
-                    }
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.5,
+    devicePixelRatio: 2, // 고해상도 지원 추가
+    scales: {
+        y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+                display: true,
+                text: '능력 점수 (100점 만점)'
+            }
+        },
+        x: {
+            title: {
+                display: true,
+                text: '학습 기간'
+            }
+        }
+    },
+    plugins: {
+        legend: {
+            display: true,
+            position: 'top'
+        },
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    return context.dataset.label + ': ' + context.raw + '점';
                 }
             }
-        };
+        }
+    }
+};
 
 
         
-        // 독해력 차트
-        var readingCtx = document.getElementById('readingChart').getContext('2d');
-        new Chart(readingCtx, {
-            type: 'line',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: '독해력 점수',
-                    data: [45, 52, 58, 67, 75, 82, 90],
-                    borderColor: '#FF8C00',
-                    backgroundColor: 'rgba(255, 140, 0, 0.1)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: chartOptions
-        });
+// 독해력 차트
+var readingCtx = document.getElementById('readingChart').getContext('2d');
+new Chart(readingCtx, {
+    type: 'line',
+    data: {
+        labels: months,
+        datasets: [{
+            label: '독해력 점수',
+            data: [45, 52, 58, 67, 75, 82, 90],
+            borderColor: '#FF8C00',
+            backgroundColor: 'rgba(255, 140, 0, 0.2)', // 투명도 증가
+            fill: true,
+            tension: 0.2, // 장력 감소
+            borderWidth: 2.5 // 선 두께 증가
+        }]
+    },
+    options: {
+        ...chartOptions,
+        devicePixelRatio: 2, // 고해상도 지원
+        animation: {
+            duration: 0 // 애니메이션 비활성화
+        }
+    }
+});
         
         // 듣기 차트
         var listeningCtx = document.getElementById('listeningChart').getContext('2d');
