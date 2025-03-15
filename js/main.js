@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var months = ['시작', '1개월', '2개월', '3개월', '4개월', '5개월', '6개월'];
         var chartOptions = {
             responsive: true,
-            maintainAspectRatio: true, /* 비율 유지 */
-            aspectRatio: 2,           /* 가로:세로 = 2:1 (필요 시 2.5~3 등 조정 가능) */
+            maintainAspectRatio: true, 
+            aspectRatio: 3,           /* 2에서 3으로 변경 */
             scales: {
                 y: {
                     beginAtZero: true,
